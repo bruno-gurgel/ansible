@@ -1,5 +1,8 @@
 - hosts: localhost
   become: true
+  vars:
+    source_key: "./.ssh/id_ed25519"
+    dest_key: "{{ lookup('env', 'HOME') }}/.ssh/id_ed25519"
   pre_tasks:
     - name: Update cache
       apt:
@@ -8,6 +11,9 @@
         - node
         - zsh
   tasks:
+    - include: tasks/ssh.yml
+    - include: tasks/git.yml
     - include: tasks/zsh.yml
     - include: tasks/node.yml
-    
+    - include: tasks/dotfiles.yml
+  
