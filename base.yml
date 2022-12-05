@@ -4,7 +4,7 @@
     dest_key: "{{ lookup('env', 'HOME') }}/.ssh/id_ed25519"
   pre_tasks:
    - name: Update cache
-     become: true
+     become: yes
      apt:
        force_apt_get: true
        update_cache: true

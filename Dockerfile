@@ -4,6 +4,8 @@ ENV DEBIAN_FRONTEND=noninteractive
 RUN apt-get update && \
     apt-get upgrade -y && \
     apt-get install -y software-properties-common curl git build-essential && \
+    apt-get -y install sudo && \
+    apt-get -y install vim && \
     apt-add-repository -y ppa:ansible/ansible && \
     apt-get update && \
     apt-get install -y curl git ansible build-essential && \
@@ -14,10 +16,20 @@ FROM base AS prime
 ARG TAGS
 RUN addgroup --gid 1000 bruno
 RUN adduser --gecos bruno --uid 1000 --gid 1000 --disabled-password bruno
+#  Add new user docker to sudo group
+ RUN adduser bruno sudo
+# Ensure sudo group users are not 
+# asked for a password when using 
+# sudo command by ammending sudoers file
+RUN echo '%sudo ALL=(ALL) NOPASSWD:ALL' >> \
+/etc/sudoers
+
 USER bruno
 WORKDIR /home/bruno
 
+RUN mkdir ansible
+
 FROM prime
-COPY . .
+COPY --chown=bruno:bruno . ./ansible/
 CMD ["sh", "-c", "ansible-playbook $TAGS base.yml"]
 
