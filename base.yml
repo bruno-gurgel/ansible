@@ -18,4 +18,8 @@
     - include: tasks/zsh.yml
     - include: tasks/node.yml
     - include: tasks/dotfiles.yml
+    - include: tasks/brew.yml
+    - include: tasks/tmux.yml
+    - include: tasks/nvim.yml
+    - include: tasks/brave.yml
   
