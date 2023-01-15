@@ -12,4 +12,18 @@
     value: "Bruno Gurgel"
   tags:
     - git-personal
+- name: Git setup merge style
+  git_config:
+    name: merge.conflictstyle
+    scope: global
+    value: "diff3"
+  tags:
+    - git-personal
+- name: Git setup merge as default conflict solver
+  git_config:
+    name: pull.rebase
+    scope: global
+    value: false
+  tags:
+    - git-personal
 

@@ -1,0 +1,13 @@
+- name: Installing tmux
+  community.general.homebrew:
+    name: tmux
+    state: present
+  tags:
+    - tmux
+- name: Installing tmuxp
+  community.general.homebrew:
+    name: tmuxp
+    state: present
+  tags:
+    - tmux
+
